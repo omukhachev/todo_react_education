@@ -22,29 +22,26 @@
   padding: 15px 10px;
 }
 
-.btns {
+.btns, .btns-on {
   font-size: 12px;
-  border: 3px solid rgba(100, 100, 100, 0);
+  border: 2px solid rgba(100, 100, 100, 0);
   background-color: white;
   border-radius: 5px;
   padding: 5px;
 }
 
-.btns:hover {
-  border: solid 3px rgba(100, 100, 100, 0.5);
+.btns-on {
+  border: solid 2px rgba(100, 100, 100, 0.5);
 }
 
-.text, #textKey {
+.text{
   font-size: 14px;
   color: gray;
   padding-bottom: 0px;
-}
-
-#textKey {
   cursor: pointer;
 }
 
-#textKey:hover {
+.text:hover {
   color: black;
 }
 
