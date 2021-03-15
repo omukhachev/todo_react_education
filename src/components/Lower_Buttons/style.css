@@ -1,0 +1,17 @@
+.lowerButtons {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0px 10px 0px;
+  }
+
+.text{
+    font-size: 14px;
+    color: gray;
+    padding-bottom: 0px;
+    cursor: pointer;
+  }
+  .text:hover {
+    color: black;
+  }

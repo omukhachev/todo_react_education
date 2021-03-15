@@ -1,0 +1,53 @@
+.flexDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    border-bottom: solid #aaaaaa 1px;
+}
+
+.checkItem {
+    padding: 12px 15px 6px 20px;
+}
+
+.checker {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.false_checker {
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    border: solid 1px gray;
+    cursor: pointer;
+}
+
+.false_checker_checked {
+    background-image: url('../../Icons/check-solid.svg');
+    background-size: 12px;
+    background-position: 3px;
+    background-repeat: no-repeat;
+    ;
+}
+
+.Icon {
+    width: 13px;
+    cursor: pointer;
+    color: #aaaaaa;
+}
+
+.Item, .Item-checked {
+    text-align: left;
+    padding: 10px 10px 10px 0px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.Item-checked {
+    text-decoration: line-through;
+    color: gray;
+}

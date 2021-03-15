@@ -1,0 +1,8 @@
+body {
+    font-family:'MS Sans';
+}
+
+@font-face{
+    font-family: 'MS Sans';
+    src: url('../fonst/18063.ttf');
+}
