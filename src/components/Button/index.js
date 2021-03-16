@@ -1,8 +1,9 @@
-import './style.css'
+import './style.css';
+import cn from 'classnames'
 
-const Button = ({ children, onClick }) => {
+const Button = ({ children, onClick, className }) => {
     return (
-        <button onClick = {onClick} className="btns">{children}</button>
+        <button onClick={onClick} className={cn(className)}>{children}</button>
     )
 }
 

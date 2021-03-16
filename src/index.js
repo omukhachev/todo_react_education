@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './pages/App';
-import reportWebVitals from './reportWebVitals';
+import ToDo from './pages/todo';
 
 ReactDOM.render(
-  <App />,
+  <ToDo />,
   document.getElementById('root')
 );
-
-reportWebVitals();

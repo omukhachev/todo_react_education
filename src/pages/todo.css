@@ -4,5 +4,5 @@ body {
 
 @font-face{
     font-family: 'MS Sans';
-    src: url('../fonst/18063.ttf');
+    src: url('../../src/access/fonst/18063.ttf');
 }

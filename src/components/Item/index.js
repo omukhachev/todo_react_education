@@ -13,13 +13,11 @@ const Item = ({
         "Item-checked": checked === true
     },
     )
-
     const classChecked = cn(
         'false_checker', {
         "false_checker_checked": checked === true
     },
     )
-
     return (
         <div className="flexDiv" >
             <div className="checkItem">
@@ -43,4 +41,5 @@ const Item = ({
         </div>
     )
 }
+
 export default Item;

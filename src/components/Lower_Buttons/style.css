@@ -1,17 +1,32 @@
 .lowerButtons {
-    width: 400px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0px 10px 0px;
-  }
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0px 10px 0px;
+}
 
-.text{
-    font-size: 14px;
-    color: gray;
-    padding-bottom: 0px;
-    cursor: pointer;
-  }
-  .text:hover {
-    color: black;
-  }
+.text {
+  font-size: 14px;
+  color: gray;
+  padding-bottom: 0px;
+  cursor: pointer;
+}
+
+.text:hover {
+  color: black;
+}
+
+.btns, .btns-on {
+  font-size: 12px;
+  border: 2px solid rgba(100, 100, 100, 0);
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.btns-on {
+  border: solid 2px rgba(100, 100, 100, 0.5);
+}

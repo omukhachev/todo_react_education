@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import Input from "../components/Input";
 import Header from '../components/Header';
 import LowerButtons from "../components/Lower_Buttons";
@@ -6,19 +6,19 @@ import Item from '../components/Item';
 import Form from '../components/Form';
 import Container from '../components/Container';
 import ItemList from '../components/ItemList';
-import './App.css';
+import './todo.css';
 
-const App = () => {
-  const [counter, setCounter] = useState(0);
+const ToDo = () => {
   const [list, setList] = useState([]);
   const [filter, setFilterValue] = useState(0);
+
   const addItem = (value) => {
     setList([...list, {
       text: value,
-      key: counter,
+      key: (!list.length) ? 0 : list[list.length - 1].key + 1,
       ready: false
     }]);
-    setCounter(counter + 1);
+    console.log()
   }
 
   const dropItem = (key) => {
@@ -30,40 +30,45 @@ const App = () => {
   }
 
   const checkItem = (key) => {
-    setList(list.map(item => {
-      if (item.key === key) {
-        item.ready = !item.ready;
-      }
-      return item;
-    }))
+    const newList = [...list];
+    newList.forEach(item => {
+      if (item.key === key) item.ready = !item.ready;
+    });
+    setList(newList);
   }
 
   const checkAll = () => {
-    setList(list.map(item => {
+    const newList = [...list];
+    newList.forEach(item => {
       item.ready = true
-      return item;
-    }));
+    });
+    setList(newList);
   }
 
   const clearCompleted = () => {
     setList(list.filter(item => !item.ready));
   }
-  
+
+  const filteredList = useMemo(() => (
+    list.filter(
+      item => {
+        switch (filter) {
+          case 0: return item;
+          case 1: return !item.ready;
+          case 2: return item.ready;
+          default: return item;
+        }
+      }
+    )
+  ), [filter, list])
+
   return (
     <Container>
       <Header headerText="Your todo list" />
       <Form>
         <Input addItem={addItem} />
         <ItemList>
-          {list.filter(
-            item => {
-              switch (filter) {
-                case 0: return item;
-                case 1: return !item.ready;
-                case 2: return item.ready;
-              }
-            }
-          ).map(item =>
+          {filteredList.map(item =>
             <Item
               item={item.text}
               id={item.key}
@@ -73,20 +78,17 @@ const App = () => {
               checked={item.ready}
             />)}
         </ItemList>
-        {list.length ?
+        {!!list.length &&
           <LowerButtons
             count={list.length}
             checkAll={checkAll}
             clearCompleted={clearCompleted}
             setFilter={setFilter}
-          />
-          :
-          <div />}
+            filter={filter}
+          />}
       </Form>
     </Container>
-
-
   );
 }
 
-export default App;
+export default ToDo;

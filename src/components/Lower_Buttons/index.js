@@ -1,15 +1,37 @@
 import Button from '../Button'
 import React from 'react'
 import './style.css'
+import cn from 'classnames'
 
-const LowerButtons = ({ count, checkAll, clearCompleted, setFilter }) => {
+const Buttons = [
+    {
+        filter: 0,
+        label: 'All',
+    },
+    {
+        filter: 1,
+        label: 'ToDo',
+    },
+    {
+        filter: 2,
+        label: 'Complete',
+    },
+]
+
+const LowerButtons = ({ count, checkAll, clearCompleted, setFilter, filter }) => {
     return (
         <div className="lowerButtons">
             <div className="text" onClick={checkAll}>{count} tasks left</div>
             <div>
-                <Button id="all" onClick = {() => setFilter(0)}>All</Button>
-                <Button id="todo" onClick = {() => setFilter(1)}>ToDo</Button>
-                <Button id="complete" onClick = {() => setFilter(2)}>Complete</Button>
+                {Buttons.map(item =>
+                    <Button
+                        key={item.filter}
+                        className={cn('btns', filter === item.filter && 'btns-on')}
+                        onClick={() => setFilter(item.filter)}
+                    >
+                        {item.label}
+                    </Button>
+                )}
             </div>
             <div className="text" onClick={clearCompleted}>Clear completed</div>
         </div>
