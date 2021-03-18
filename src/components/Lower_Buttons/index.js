@@ -33,7 +33,7 @@ const LowerButtons = ({ count, checkAll, clearCompleted, setFilter, filter, isCh
                     </Button>
                 )}
             </div>
-            {isCheckedItems() !== undefined ? <div className="clear-completed" onClick={clearCompleted}>Clear completed</div> : <div className='clear-completed' />}
+            {isCheckedItems() !== undefined && <div className="clear-completed" onClick={clearCompleted}>Clear completed</div>}
         </div>
     );
 }

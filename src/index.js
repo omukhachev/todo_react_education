@@ -8,6 +8,7 @@ import Middleware from './store/middleware';
 import './index.css';
 
 const localStorageState = localStorage.getItem('state');
+
 const initialState = localStorageState ? JSON.parse(localStorageState) : {
   list: {
     data: [],

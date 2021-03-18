@@ -15,6 +15,7 @@ const ToDo = () => {
   const listStore = useSelector(state => state.list);
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter.currentFilter);
+ 
   const addItemHandle = useCallback((value) => {
     dispatch(addItem({
       text: value,
@@ -65,7 +66,7 @@ const ToDo = () => {
       <Header headerText="Your todo list" />
       <Form>
         <Input addItem={addItemHandle} />
-        <ItemList>
+        {!!filteredList.length && <ItemList>
           {filteredList.map(item =>
             <Item
               item={item.text}
@@ -75,7 +76,7 @@ const ToDo = () => {
               checkItem={checkItemHandle}
               checked={item.ready}
             />)}
-        </ItemList>
+        </ItemList>}
         {!!listStore.data.length &&
           <LowerButtons
             count={listStore.data.length}

@@ -15,21 +15,25 @@ const List = (state = list, action) => {
     }
     case DROP_ITEM: {
       return {
+        ...state,
         data: action.payload
       };
     }
     case CHECK_ITEM: {
       return {
+        ...state,
         data: action.payload
       };
     }
     case CHECK_ALL: {
       return {
+        ...state,
         data: action.payload
       };
     }
     case CLEAR_COMPLETED: {
       return {
+        ...state,
         data: action.payload
       };
     }
