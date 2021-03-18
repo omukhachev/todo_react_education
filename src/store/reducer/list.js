@@ -10,36 +10,31 @@ const List = (state = list, action) => {
     case ADD_ITEM: {
       return {
         ...state,
-        data: [...state.data, action.payload],
-        loading: false
+        data: [...state.data, action.payload]
       };
     }
     case DROP_ITEM: {
       return {
         ...state,
-        data: action.payload,
-        loading: false
+        data: action.payload
       };
     }
     case CHECK_ITEM: {
       return {
         ...state,
-        data: action.payload,
-        loading: false
+        data: action.payload
       };
     }
     case CHECK_ALL: {
       return {
         ...state,
-        data: action.payload,
-        loading: false
+        data: action.payload
       };
     }
     case CLEAR_COMPLETED: {
       return {
         ...state,
-        data: action.payload,
-        loading: false
+        data: action.payload
       };
     }
     default: return state;
