@@ -3,7 +3,8 @@
   justify-content: center;
   border: none;
   border-bottom: solid #cccccc 1px;
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   padding: 0px 10px 0px 10px;
   margin: 10px 15px 25px 15px;
 }

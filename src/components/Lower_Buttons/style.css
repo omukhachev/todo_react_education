@@ -1,19 +1,24 @@
 .lowerButtons {
-  width: 400px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 0px 10px 0px;
 }
 
-.text {
+.tasks-left, .clear-completed {
   font-size: 14px;
   color: gray;
-  padding-bottom: 0px;
+  padding: 10px;
   cursor: pointer;
+  width: 90%;
 }
 
-.text:hover {
+.tasks-left {
+  width: 70%;
+}
+
+.tasks-left:hover, .clear-completed:hover {
   color: black;
 }
 
@@ -24,9 +29,13 @@
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .btns-on {
   border: solid 2px rgba(100, 100, 100, 0.5);
+}
+
+.buttons {
+  width: 100%;
 }

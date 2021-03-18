@@ -1,6 +1,6 @@
-import Trash from '../../Icons/trash'
-import cn from 'classnames'
-import './style.css'
+import Trash from '../../Icons/trash';
+import cn from 'classnames';
+import './style.css';
 
 const Item = ({
     item,
@@ -39,7 +39,7 @@ const Item = ({
                 <Trash className="Icon" />
             </div>
         </div>
-    )
+    );
 }
 
 export default Item;

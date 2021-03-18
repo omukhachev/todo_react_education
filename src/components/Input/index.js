@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './style.css'
+import './style.css';
 
 const Input = ({ addItem }) => {
     const [value, setValue] = useState('');
@@ -20,7 +20,7 @@ const Input = ({ addItem }) => {
             placeholder="Enter your task name here"
             onChange={(e) => setValue(e.target.value)}
         />
-    )
+    );
 }
 
-export default Input
+export default Input;

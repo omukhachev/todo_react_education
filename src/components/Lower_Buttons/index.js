@@ -1,7 +1,7 @@
-import Button from '../Button'
-import React from 'react'
-import './style.css'
-import cn from 'classnames'
+import Button from '../Button';
+import React from 'react';
+import './style.css';
+import cn from 'classnames';
 
 const Buttons = [
     {
@@ -18,11 +18,11 @@ const Buttons = [
     },
 ]
 
-const LowerButtons = ({ count, checkAll, clearCompleted, setFilter, filter }) => {
+const LowerButtons = ({ count, checkAll, clearCompleted, setFilter, filter, isCheckedItems }) => {
     return (
         <div className="lowerButtons">
-            <div className="text" onClick={checkAll}>{count} tasks left</div>
-            <div>
+            <div className="tasks-left" onClick={checkAll}>{count} tasks left</div>
+            <div className='buttons'>
                 {Buttons.map(item =>
                     <Button
                         key={item.filter}
@@ -33,9 +33,9 @@ const LowerButtons = ({ count, checkAll, clearCompleted, setFilter, filter }) =>
                     </Button>
                 )}
             </div>
-            <div className="text" onClick={clearCompleted}>Clear completed</div>
+            {isCheckedItems() !== undefined ? <div className="clear-completed" onClick={clearCompleted}>Clear completed</div> : <div className='clear-completed' />}
         </div>
-    )
+    );
 }
 
 export default LowerButtons;
