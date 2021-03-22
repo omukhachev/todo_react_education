@@ -9,19 +9,24 @@ import Item from '../../components/Item';
 import Form from '../../components/Form';
 import Container from '../../components/Container';
 import ItemList from '../../components/ItemList';
+import { postItem } from '../../remote';
 import './todo.css';
 
 const ToDo = () => {
   const listStore = useSelector(state => state.list);
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter.currentFilter);
- 
+  const remUrl = 'http://localhost:1122';
+
   const addItemHandle = useCallback((value) => {
-    dispatch(addItem({
+    const data = {
+      id_u: '60586cc7c911a043b5df4a9e',
       text: value,
       key: !listStore.data.length ? 0 : listStore.data[listStore.data.length - 1].key + 1,
       ready: false,
-    }));
+    }
+    postItem(data, remUrl);
+    dispatch(addItem(data));
   }, [dispatch, listStore]);
 
   const dropItemHandle = (key) => {
