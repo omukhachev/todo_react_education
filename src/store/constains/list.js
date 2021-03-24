@@ -1,5 +1,13 @@
 export const ADD_ITEM = 'list/add-item';
+export const ADD_ITEM_ERROR = 'list/add-item-error';
 export const DROP_ITEM = 'list/drop-item';
+export const DROP_ITEM_ERROR = 'list/drop-item-error';
 export const CHECK_ITEM = 'list/check-item';
+export const CHECK_ITEM_ERROR = 'list/check-item-error';
 export const CHECK_ALL = 'list/check-all';
+export const CHECK_ALL_ERROR = 'list/check-all-error';
 export const CLEAR_COMPLETED = 'list/clear-completed';
+export const CLEAR_COMPLETED_ERROR = 'list/clear-completed-error';
+export const GET_LIST_START = 'list/get-start';
+export const GET_LIST_SUCCESS = 'list/get-success';
+export const GET_LIST_ERROR = 'list/get-error';

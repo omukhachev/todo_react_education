@@ -1,6 +1,13 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { addItem, dropItem, checkItem, checkAll, clearCompleted } from '../../store/actions/list';
+import {
+  addItem,
+  dropItem,
+  checkItem,
+  checkAll,
+  clearCompleted,
+  getList,
+} from '../../store/actions/list';
 import { setFilter } from '../../store/actions/filter';
 import Input from "../../components/Input";
 import Header from '../../components/Header';
@@ -9,25 +16,27 @@ import Item from '../../components/Item';
 import Form from '../../components/Form';
 import Container from '../../components/Container';
 import ItemList from '../../components/ItemList';
-import { postItem } from '../../remote';
-import './todo.css';
+
+import './style.css';
 
 const ToDo = () => {
-  const listStore = useSelector(state => state.list);
-  const dispatch = useDispatch();
+  const list = useSelector(state => state.list.data);
   const filter = useSelector(state => state.filter.currentFilter);
-  const remUrl = 'http://localhost:1122';
+  const dispatch = useDispatch();
 
-  const addItemHandle = useCallback((value) => {
+  useEffect(() => {
+    if (!list.length) dispatch(getList());
+  }, [dispatch, list.length])
+
+  const addItemHandle = (value) => {
     const data = {
-      id_u: '60586cc7c911a043b5df4a9e',
+      user_id: '60586cc7c911a043b5df4a9e',
       text: value,
-      key: !listStore.data.length ? 0 : listStore.data[listStore.data.length - 1].key + 1,
+      key: !list.length ? 0 : list[list.length - 1].key + 1,
       ready: false,
     }
-    postItem(data, remUrl);
     dispatch(addItem(data));
-  }, [dispatch, listStore]);
+  };
 
   const dropItemHandle = (key) => {
     dispatch(dropItem(key));
@@ -50,11 +59,12 @@ const ToDo = () => {
   }
 
   const isCheckedItems = () => {
-    return listStore.data.find((item) => item.ready === true);
+    return list.find((item) => item.ready === true);
   }
 
-  const filteredList = useMemo(() => (
-    listStore.data.filter(
+  const filteredList = useMemo(() => {
+    if (!list.length) return [];
+    return list.filter(
       item => {
         switch (filter) {
           case 0: return item;
@@ -62,9 +72,8 @@ const ToDo = () => {
           case 2: return item.ready;
           default: return item;
         }
-      }
-    )
-  ), [filter, listStore])
+      })
+  }, [filter, list])
 
   return (
     <Container>
@@ -82,9 +91,9 @@ const ToDo = () => {
               checked={item.ready}
             />)}
         </ItemList>}
-        {!!listStore.data.length &&
+        {!!list.length &&
           <LowerButtons
-            count={listStore.data.length}
+            count={list.length}
             checkAll={checkAllHandle}
             clearCompleted={clearCompletedHandle}
             setFilter={setFilterHandle}
