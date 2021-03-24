@@ -1,7 +1,6 @@
 .item_list {
     overflow: auto;
     width: 100%;
-    border-bottom: 1px #cccccc solid;
 }
 
 ::-webkit-scrollbar {
