@@ -11,9 +11,9 @@ export const getListItem = async () => {
     }
 }
 
-export const postListItem = (data) => {
+export const postListItem = async (data) => {
     try {
-        fetch(`${rem_url}/items/create`,
+        const response = await fetch(`${rem_url}/items/create`,
             {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -22,67 +22,76 @@ export const postListItem = (data) => {
                 },
             }
         );
+        return await response.json();
     }
     catch (e) {
         throw new Error(e);
     }
 }
 
-export const deleteListItem = (key) => {
+export const deleteListItem = async (key) => {
     try {
-        fetch(`${rem_url}/items/delete/${key}`,
+        const response = await fetch(`${rem_url}/items/delete/${user_id}/${key}`,
             {
                 method: 'DELETE',
-            })
+            }
+        )
+        return await response.json();
     }
     catch (e) {
         throw new Error(e);
     }
 }
 
-export const checkListItem = (key, state) => {
+export const checkListItem = async (key, state) => {
     const data = {
-        ready: !state.list.data.find(item => item.key === key).ready
+        isChecked: !state.list.data.find(item => item.key === key).isChecked
     };
     try {
-        fetch(`${rem_url}/items/update/${key}`,
+        const response = await fetch(`${rem_url}/items/update/${user_id}/${key}`,
             {
                 method: 'PUT',
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
                 },
-            })
+            }
+        )
+        return await response.json();
     }
     catch (e) {
         throw new Error(e);
     }
 }
 
-export const checkAllItems = () => {
+export const checkAllItems = async () => {
     try {
-        fetch(`${rem_url}/items/update`,
+        const response = await fetch(`${rem_url}/items/update/${user_id}`,
             {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-            })
+            }
+        )
+        return await response.json();
     }
     catch (e) {
         throw new Error(e);
     }
 }
 
-export const clearCompletedItems = () => {
+export const clearCompletedItems = async () => {
     try {
-        fetch(`${rem_url}/items/delete`,
+        const response = await fetch(`${rem_url}/items/delete/${user_id}`,
             {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
+            }
+        )
+        return await response.json();
     }
     catch (e) {
         throw new Error(e);

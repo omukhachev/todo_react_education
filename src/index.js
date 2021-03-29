@@ -12,6 +12,7 @@ import './index.css';
     list: {
       data: [],
       loading: true,
+      loadingItems: [],
     },
     filter: {
       currentFilter: 0,

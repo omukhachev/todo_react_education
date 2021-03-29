@@ -1,6 +1,8 @@
 import Trash from '../../Icons/trash';
 import cn from 'classnames';
 import './style.css';
+import { useSelector } from 'react-redux';
+import ItemLoader from '../ItemLoader';
 
 const Item = ({
     item,
@@ -8,18 +10,17 @@ const Item = ({
     dropItem,
     checkItem,
     checked }) => {
-    const classNames = cn(
-        'Item', {
-        "Item-checked": checked === true
-    },
-    )
-    const classChecked = cn(
-        'false_checker', {
-        "false_checker_checked": checked === true
-    },
-    )
+
+    const loadingSome = !!useSelector(state => state.list.loadingItems.includes(id));
+    const loadingAll = !!useSelector(state => state.list.loadingItems.includes('all'));
+    if (loadingSome || loadingAll) {
+        return (
+            <ItemLoader />
+        )
+    };
+
     return (
-        <div className="flexDiv" >
+        <div className='flexDiv'>
             <div className="checkItem">
                 <label>
                     <input
@@ -28,11 +29,17 @@ const Item = ({
                         onChange={() => checkItem(id)}
                         checked={checked}
                     />
-                    <div className={classChecked} />
+                    <div className={cn('false_checker', {
+                        "false_checker_checked": checked === true
+                    })} />
                 </label>
 
             </div>
-            <div className={classNames}>{item}</div>
+            <div className={cn('Item', {
+                "Item-checked": checked === true
+            })}>
+                {item}
+            </div>
             <div
                 onClick={() => dropItem(id)}
                 style={{ margin: 10, marginRight: 30 }}>

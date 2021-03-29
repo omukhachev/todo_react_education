@@ -1,17 +1,22 @@
 import {
-  ADD_ITEM,
+  ADD_ITEM_START,
+  ADD_ITEM_SUCCESS,
   ADD_ITEM_ERROR,
-  CHECK_ITEM,
+  CHECK_ITEM_START,
+  CHECK_ITEM_SUCCESS,
   CHECK_ITEM_ERROR,
-  DROP_ITEM,
+  DROP_ITEM_START,
+  DROP_ITEM_SUCCESS,
   DROP_ITEM_ERROR,
-  CHECK_ALL,
+  CHECK_ALL_START,
+  CHECK_ALL_SUCCESS,
   CHECK_ALL_ERROR,
-  CLEAR_COMPLETED,
+  CLEAR_COMPLETED_START,
+  CLEAR_COMPLETED_SUCCESS,
+  CLEAR_COMPLETED_ERROR,
   GET_LIST_START,
   GET_LIST_SUCCESS,
   GET_LIST_ERROR,
-  CLEAR_COMPLETED_ERROR,
 } from '../constains/list';
 import {
   getListItem,
@@ -23,12 +28,17 @@ import {
 } from '../../service/list'
 
 export function addItem(data) {
-  return function (dispatch) {
+  return async function (dispatch) {
+    dispatch({
+      type: ADD_ITEM_START,
+      key: data.key,
+    })
     try {
-      postListItem(data);
+      const state = await postListItem(data);
       return dispatch({
-        type: ADD_ITEM,
-        payload: data,
+        type: ADD_ITEM_SUCCESS,
+        key: data.key,
+        payload: state,
       })
     }
     catch {
@@ -40,12 +50,15 @@ export function addItem(data) {
 }
 
 export function dropItem(key) {
-  return function (dispatch, getState) {
+  return async function (dispatch, getState) {
+    dispatch({
+      type: DROP_ITEM_START,
+      key: key,
+    })
     try {
-      deleteListItem(key);
-      const state = getState().list.data.filter(item => item.key !== key)
+      const state = await deleteListItem(key);
       return dispatch({
-        type: DROP_ITEM,
+        type: DROP_ITEM_SUCCESS,
         payload: state,
       });
     }
@@ -58,16 +71,17 @@ export function dropItem(key) {
 }
 
 export function checkItem(key) {
-  return function (dispatch, getState) {
+  return async function (dispatch, getState) {
+    dispatch({
+      type: CHECK_ITEM_START,
+      key: key,
+    })
     try {
-      checkListItem(key, getState());
-      const state = [...getState().list.data]
-      state.forEach(item => {
-        if (item.key === key) item.ready = !item.ready;
-      })
+      const state = await checkListItem(key, getState());
       return dispatch({
-        type: CHECK_ITEM,
+        type: CHECK_ITEM_SUCCESS,
         payload: state,
+        key: key,
       });
     }
     catch (e) {
@@ -79,15 +93,14 @@ export function checkItem(key) {
 }
 
 export function checkAll() {
-  return function (dispatch, getState) {
+  return async function (dispatch) {
+    dispatch({
+      type: CHECK_ALL_START,
+    })
     try {
-      checkAllItems();
-      const state = [...getState().list.data]
-      state.forEach(item => {
-        item.ready = true;
-      });
+      const state = await checkAllItems();
       return dispatch({
-        type: CHECK_ALL,
+        type: CHECK_ALL_SUCCESS,
         payload: state,
       });
     }
@@ -101,12 +114,14 @@ export function checkAll() {
 }
 
 export function clearCompleted() {
-  return function (dispatch, getState) {
+  return async function (dispatch, getState) {
+    dispatch({
+      type: CLEAR_COMPLETED_START,
+    })
     try {
-      clearCompletedItems();
-      const state = getState().list.data.filter(item => !item.ready)
+      const state = await clearCompletedItems();
       return dispatch({
-        type: CLEAR_COMPLETED,
+        type: CLEAR_COMPLETED_SUCCESS,
         payload: state,
       });
     }

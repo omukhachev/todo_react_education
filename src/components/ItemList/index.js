@@ -1,6 +1,6 @@
 import './style.css';
 
-const ItemList = ({ children }) => {
+const ItemList = ({ children }) => {    
     return (
         <div className="item_list">{children}</div>
     );

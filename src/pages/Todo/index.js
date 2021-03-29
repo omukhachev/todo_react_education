@@ -16,6 +16,7 @@ import Item from '../../components/Item';
 import Form from '../../components/Form';
 import Container from '../../components/Container';
 import ItemList from '../../components/ItemList';
+import FormLoader from '../../components/FormLoader';
 
 import './style.css';
 
@@ -26,14 +27,15 @@ const ToDo = () => {
 
   useEffect(() => {
     if (!list.length) dispatch(getList());
-  }, [dispatch, list.length])
+
+  },[])
 
   const addItemHandle = (value) => {
     const data = {
       user_id: '60586cc7c911a043b5df4a9e',
       text: value,
       key: !list.length ? 0 : list[list.length - 1].key + 1,
-      ready: false,
+      isChecked: false,
     }
     dispatch(addItem(data));
   };
@@ -59,7 +61,7 @@ const ToDo = () => {
   }
 
   const isCheckedItems = () => {
-    return list.find((item) => item.ready === true);
+    return list.find((item) => item.isChecked === true);
   }
 
   const filteredList = useMemo(() => {
@@ -68,12 +70,23 @@ const ToDo = () => {
       item => {
         switch (filter) {
           case 0: return item;
-          case 1: return !item.ready;
-          case 2: return item.ready;
+          case 1: return !item.isChecked;
+          case 2: return item.isChecked;
           default: return item;
         }
       })
   }, [filter, list])
+
+  if (useSelector(state => state.list.loading)) {
+    return (
+      <Container>
+        <Header headerText="Your todo list" />
+        <Form>
+          <FormLoader />
+        </Form>
+      </Container>
+    )
+  }
 
   return (
     <Container>
@@ -88,7 +101,7 @@ const ToDo = () => {
               key={item.key}
               dropItem={dropItemHandle}
               checkItem={checkItemHandle}
-              checked={item.ready}
+              checked={item.isChecked}
             />)}
         </ItemList>}
         {!!list.length &&
