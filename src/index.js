@@ -5,6 +5,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import rootReducer from "./store";
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import { BrowserRouter as Router, Route, } from "react-router-dom";
 import './index.css';
 
 !localStorage.getItem('state') && localStorage.setItem('state', JSON.stringify(
@@ -17,6 +20,12 @@ import './index.css';
     filter: {
       currentFilter: 0,
     },
+    response: {
+      token: null,
+      response: null,
+      error: null,
+      loading: false,
+    }
   }
 ))
 
@@ -29,7 +38,11 @@ const store = compose(
 
 ReactDOM.render(
   <Provider store={store}>
-    <ToDo />
+    <Router>      
+      <Route exact path="/" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/todo" component={ToDo} />     
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

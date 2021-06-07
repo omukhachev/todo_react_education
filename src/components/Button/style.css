@@ -1,4 +1,4 @@
-.btns, .btns-on {
+.btns, .btns-on, .loginButton {
   font-size: 12px;
   border: 2px solid rgba(100, 100, 100, 0);
   background-color: white;
@@ -6,4 +6,14 @@
   padding: 5px;
   cursor: pointer;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loginButton {
+  font-size: 14px;
+  margin-bottom: 15px;
+  border: 2px solid #cccccc;
+}
+
+.loginButton:hover {
+  background-color: #cccccc;
 }

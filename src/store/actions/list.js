@@ -114,7 +114,7 @@ export function checkAll() {
 }
 
 export function clearCompleted() {
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     dispatch({
       type: CLEAR_COMPLETED_START,
     })

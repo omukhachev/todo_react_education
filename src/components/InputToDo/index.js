@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 import './style.css';
 
-const Input = ({ addItem }) => {
+const InputToDo = ({ addItem }) => {
     const [value, setValue] = useState('');
     const onKeyDown = (e) => {
         if (e.keyCode === 13) {
@@ -23,4 +23,4 @@ const Input = ({ addItem }) => {
     );
 }
 
-export default Input;
+export default InputToDo;

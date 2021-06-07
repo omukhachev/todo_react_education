@@ -9,7 +9,7 @@ import {
   getList,
 } from '../../store/actions/list';
 import { setFilter } from '../../store/actions/filter';
-import Input from "../../components/Input";
+import InputToDo from "../../components/InputToDo";
 import Header from '../../components/Header';
 import LowerButtons from "../../components/Lower_Buttons";
 import Item from '../../components/Item';
@@ -92,7 +92,7 @@ const ToDo = () => {
     <Container>
       <Header headerText="Your todo list" />
       <Form>
-        <Input addItem={addItemHandle} />
+        <InputToDo addItem={addItemHandle} />
         {!!filteredList.length && <ItemList>
           {filteredList.map(item =>
             <Item

@@ -1,0 +1,33 @@
+.textLabel {
+    text-align: center;
+}
+.smLabel {
+    font-size: 12px;
+    text-align: right;
+    width: 70%;
+    color: #999999;
+}
+
+.warning {
+    color: red;
+    animation-duration: 400ms;
+    animation-name: warning-slide;
+}
+
+@keyframes warning-slide {
+    0% {
+        margin-left: 0
+    }
+    25% {
+        margin-left: 10px
+    }
+    50% {
+        margin-left: 3px
+    }
+    75% {
+        margin-left: 10px;
+    }
+    100% {
+        margin-left: 0;
+    }
+}
