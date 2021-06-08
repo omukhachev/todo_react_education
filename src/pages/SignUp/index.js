@@ -9,12 +9,11 @@ import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearResponse, createUser } from '../../store/actions/user'
+import { createUser } from '../../store/actions/user'
 import Popup from '../../components/Popup';
 
 const SignUp = () => {
 
-    const sha256 = require('js-sha256');
     const dispatch = useDispatch();
     const [passwordValue, setPasswordValue] = useState('');
     const [copyValue, setCopyValue] = useState('');
@@ -26,7 +25,7 @@ const SignUp = () => {
     const [isPopup, setIsPopup] = useState(false);
     const result = useSelector(state => state.user.response);
 
-   
+
     useEffect(() => {
         setIsMailOk(mailValidator.test(mail));
     }, [mail]);
@@ -52,8 +51,8 @@ const SignUp = () => {
     };
 
     useEffect(() => {
-        !!serverResponse.length && setTimeout (setServerResponse, 3000,'');       
-    },[serverResponse])
+        !!serverResponse.length && setTimeout(setServerResponse, 3000, '');
+    }, [serverResponse])
 
 
     return (
@@ -76,7 +75,7 @@ const SignUp = () => {
                     placeHolder="Repeat password"
                     onChange={(e) => setCopyValue(e.target.value)}
                 />
-                <TextLabel className={cx((!isPasswordOk) ? "smLabel warning" : "smLabel hidden")} textContent={!isPasswordOk && 'Password should match and be longer that 6 symbols'}/>
+                <TextLabel className={cx((!isPasswordOk) ? "smLabel warning" : "smLabel hidden")} textContent={!isPasswordOk && 'Password should match and be longer that 6 symbols'} />
                 <TextLabel
                     className="smLabel"
                     textContent="Already have an account?"
@@ -90,7 +89,7 @@ const SignUp = () => {
                 </TextLabel>
                 <Button
                     className="loginButton"
-                    onClick={() => isMailOk && isPasswordOk && onSubmit({ login: mail, password: sha256(passwordValue) })}
+                    onClick={() => isMailOk && isPasswordOk && onSubmit({ login: mail, password: passwordValue })}
                 >Submit</Button>
             </Form>
             <Popup
