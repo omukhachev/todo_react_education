@@ -1,9 +1,11 @@
+import cx from 'classnames';
+
 import './style.css';
 
-const Form = ({ children }) => {
+const Form = ({ loading, children }) => {
     return (
-        <div className="form container">{children}</div>
+        <div className={`form container ${cx(loading && 'loading')}`}>{children}</div>
     );
 }
 
-export default Form
+export default Form;

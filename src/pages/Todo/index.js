@@ -1,5 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {
   addItem,
   dropItem,
@@ -23,16 +24,17 @@ import './style.css';
 const ToDo = () => {
   const list = useSelector(state => state.list.data);
   const filter = useSelector(state => state.filter.currentFilter);
+  const token = localStorage.getItem('uid');
+  const isFormLoading = useSelector(state => state.list.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!list.length) dispatch(getList());
-
-  },[])
+    if (!list.length && !!token) dispatch(getList());
+  }, [])
 
   const addItemHandle = (value) => {
     const data = {
-      user_id: '60586cc7c911a043b5df4a9e',
+      user_id: token,
       text: value,
       key: !list.length ? 0 : list[list.length - 1].key + 1,
       isChecked: false,
@@ -77,44 +79,40 @@ const ToDo = () => {
       })
   }, [filter, list])
 
-  if (useSelector(state => state.list.loading)) {
-    return (
-      <Container>
-        <Header headerText="Your todo list" />
-        <Form>
-          <FormLoader />
-        </Form>
-      </Container>
-    )
-  }
-
   return (
-    <Container>
-      <Header headerText="Your todo list" />
-      <Form>
-        <InputToDo addItem={addItemHandle} />
-        {!!filteredList.length && <ItemList>
-          {filteredList.map(item =>
-            <Item
-              item={item.text}
-              id={item.key}
-              key={item.key}
-              dropItem={dropItemHandle}
-              checkItem={checkItemHandle}
-              checked={item.isChecked}
-            />)}
-        </ItemList>}
-        {!!list.length &&
-          <LowerButtons
-            count={list.length}
-            checkAll={checkAllHandle}
-            clearCompleted={clearCompletedHandle}
-            setFilter={setFilterHandle}
-            filter={filter}
-            isCheckedItems={isCheckedItems}
-          />}
-      </Form>
-    </Container>
+    <>
+      {!token ? <Redirect to="/" /> :
+        <Container>
+          <Header headerText="Your todo list" />
+          <Form>
+            {isFormLoading ? <FormLoader /> :
+              <>
+                <InputToDo addItem={addItemHandle} />
+                {!!filteredList.length && <ItemList>
+                  {filteredList.map(item =>
+                    <Item
+                      item={item.text}
+                      id={item.key}
+                      key={item.key}
+                      dropItem={dropItemHandle}
+                      checkItem={checkItemHandle}
+                      checked={item.isChecked}
+                      token={token}
+                    />)}
+                </ItemList>}
+                {!!list.length &&
+                  <LowerButtons
+                    count={list.length}
+                    checkAll={checkAllHandle}
+                    clearCompleted={clearCompletedHandle}
+                    setFilter={setFilterHandle}
+                    filter={filter}
+                    isCheckedItems={isCheckedItems}
+                  />}
+              </>}
+          </Form>
+        </Container>}
+    </>
   );
 }
 

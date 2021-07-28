@@ -8,8 +8,8 @@ const user = {
 }
 
 const User = (state = user, action) => {
-    
-    switch(action.type) {
+
+    switch (action.type) {
         case constains.ADD_USER_START: {
             return {
                 ...state,
@@ -30,7 +30,33 @@ const User = (state = user, action) => {
                 loading: false,
             };
         }
-    default: return state;
+        case constains.AUTH_USER_START: {
+            return {
+                ...state,
+                loading: true,
+            };
+        }
+        case constains.AUTH_USER_SUCCESS: {
+            return {
+                ...state,
+                token: action.payload,
+                loading: false,
+            };
+        }
+        case constains.AUTH_USER_ERROR: {
+            return {
+                ...state,
+                loading: false,
+            };
+        }
+        case constains.CLEAR_RESPONSE: {
+            return {
+                ...state,
+                response: null,
+                error: null,
+            }
+        }
+        default: return state;
     }
 }
 

@@ -1,10 +1,10 @@
 import './style.css';
 import cn from 'classnames';
 
-const Button = ({ children, onClick, className }) => {
+const Button = ({ children, onClick, className, disabled }) => {
     return (
-        <button onClick={onClick} className={cn(className)}>{children}</button>
+        <button onClick={!disabled && onClick} className={cn(className)}>{children}</button>
     );
 }
 
-export default Button
+export default Button;

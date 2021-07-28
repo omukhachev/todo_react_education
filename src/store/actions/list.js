@@ -113,13 +113,13 @@ export function checkAll() {
   }
 }
 
-export function clearCompleted() {
+export function clearCompleted(token) {
   return async function (dispatch) {
     dispatch({
       type: CLEAR_COMPLETED_START,
     })
     try {
-      const state = await clearCompletedItems();
+      const state = await clearCompletedItems(token);
       return dispatch({
         type: CLEAR_COMPLETED_SUCCESS,
         payload: state,
@@ -133,13 +133,13 @@ export function clearCompleted() {
   }
 }
 
-export function getList() {
+export function getList(token) {
   return async function (dispatch) {
     dispatch({
       type: GET_LIST_START,
     })
     try {
-      const data = await getListItem();
+      const data = await getListItem(token);
       return dispatch({
         type: GET_LIST_SUCCESS,
         payload: data,

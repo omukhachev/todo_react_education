@@ -13,14 +13,9 @@ const Item = ({
 
     const loadingSome = !!useSelector(state => state.list.loadingItems.includes(id));
     const loadingAll = !!useSelector(state => state.list.loadingItems.includes('all'));
-    if (loadingSome || loadingAll) {
-        return (
-            <ItemLoader />
-        )
-    };
 
     return (
-        <div className='flexDiv'>
+        <div className={cn('flexDiv' , (loadingSome || loadingAll) && 'itemLoader')}>
             <div className="checkItem">
                 <label>
                     <input

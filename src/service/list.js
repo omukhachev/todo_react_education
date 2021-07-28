@@ -1,9 +1,21 @@
+import jwt from 'jsonwebtoken';
+
 const rem_url = 'http://localhost:1122';
-const user_id = '60586cc7c911a043b5df4a9e';
+
+const token = jwt.sign({ id: localStorage.getItem('uid') }, 'privateKey');
 
 export const getListItem = async () => {
     try {
-        const response = await fetch(`${rem_url}/items/${user_id}`);
+        const sendData = { token: token };
+        const response = await fetch(`${rem_url}/items/user`,
+            {
+                method: 'POST',
+                body: JSON.stringify(sendData),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }
+        );
         return await response.json();
     }
     catch (e) {
@@ -13,10 +25,11 @@ export const getListItem = async () => {
 
 export const postListItem = async (data) => {
     try {
+        const sendData = { ...data, token: token };
         const response = await fetch(`${rem_url}/items/create`,
             {
                 method: 'POST',
-                body: JSON.stringify(data),
+                body: JSON.stringify(sendData),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -30,10 +43,15 @@ export const postListItem = async (data) => {
 }
 
 export const deleteListItem = async (key) => {
+    const sendData = { token: token };
     try {
-        const response = await fetch(`${rem_url}/items/delete/${user_id}/${key}`,
+        const response = await fetch(`${rem_url}/items/delete/user/${key}`,
             {
-                method: 'DELETE',
+                method: 'POST',
+                body: JSON.stringify(sendData),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
             }
         )
         return await response.json();
@@ -45,12 +63,13 @@ export const deleteListItem = async (key) => {
 
 export const checkListItem = async (key, state) => {
     const data = {
-        isChecked: !state.list.data.find(item => item.key === key).isChecked
+        isChecked: !state.list.data.find(item => item.key === key).isChecked,
+        token: token,
     };
     try {
-        const response = await fetch(`${rem_url}/items/update/${user_id}/${key}`,
+        const response = await fetch(`${rem_url}/items/update/user/${key}`,
             {
-                method: 'PUT',
+                method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
@@ -65,10 +84,12 @@ export const checkListItem = async (key, state) => {
 }
 
 export const checkAllItems = async () => {
+    const sendData = { token: token };
     try {
-        const response = await fetch(`${rem_url}/items/update/${user_id}`,
+        const response = await fetch(`${rem_url}/items/update/user`,
             {
-                method: 'PUT',
+                method: 'POST',
+                body: JSON.stringify(sendData),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -82,13 +103,15 @@ export const checkAllItems = async () => {
 }
 
 export const clearCompletedItems = async () => {
+    const sendData = { token: token };
     try {
-        const response = await fetch(`${rem_url}/items/delete/${user_id}`,
+        const response = await fetch(`${rem_url}/items/delete/user`,
             {
-                method: 'DELETE',
+                method: 'POST',
+                body: JSON.stringify(sendData),
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
             }
         )
         return await response.json();

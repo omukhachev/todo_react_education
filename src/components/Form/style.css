@@ -6,7 +6,19 @@
     padding: 30px 0px 0px 0px !important;
     max-height: 418px;
     max-width: 430px;
-    
-
 }
 
+.loading {
+    background: linear-gradient( 140deg, #ffffff 40%, #ebebeb 50%, #ffffff 60%);
+    animation: loading 0.9s ease-in-out infinite;
+    background-size: 400%;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}

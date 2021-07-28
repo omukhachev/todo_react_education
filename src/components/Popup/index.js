@@ -5,9 +5,9 @@ import Header from '../Header'
 
 import './style.css'
 
-const Popup = ({ isOpen, popupMessage }) => {
+const Popup = ({ isOpen, popupMessage, error }) => {
     return (
-        <div className={cx(!!isOpen ? "popup-container show" : "popup-container hide")}>
+        <div className={cx(!!isOpen ? `popup-container show ${!!error && 'error'}` : `popup-container hide ${!!error && 'error'}`)}>
             <Header headerText={popupMessage} />
         </div>
     )
