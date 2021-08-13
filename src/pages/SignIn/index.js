@@ -2,6 +2,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import jwt from 'jsonwebtoken';
+import { useHistory } from 'react-router-dom';
 
 import TextLabel from '../../components/TextLabel';
 import Container from '../../components/Container';
@@ -16,6 +17,7 @@ import './style.css';
 
 const SignIn = () => {
 
+    const history = useHistory();
     const dispatch = useDispatch();
     const [data, setData] = useState({
         login: '',
@@ -29,17 +31,15 @@ const SignIn = () => {
     }, [token]);
 
     const submitLogin = () => {
-        !!data.login.length &&
-            !!data.password.length &&
-            dispatch(authUser({
-                login: data.login,
-                password: data.password
-            }));
+        dispatch(authUser({
+            login: data.login,
+            password: data.password
+        }));
     };
 
     return (
         <>
-            {!!localStorage.getItem('uid') ? <Redirect to="/todo" /> :
+            {!!localStorage.getItem('uid') ? history.push("/todo") :
                 <Container>
                     <Header headerText="Sign in" />
                     <Form loading={loading}>
@@ -64,11 +64,12 @@ const SignIn = () => {
                                     password: e.target.value,
                                 })
                             }}
+                            value={data.password}
                         />
                         <TextLabel className="smLabel" textContent="Have no account?"><NavLink style={{ color: '#555555' }} to="/signup">Sign up</NavLink></TextLabel>
                         <Button
                             className="loginButton"
-                            onClick={submitLogin}
+                            onClick={() => !!data.login.length && !!data.password.length && submitLogin()}
                             disabled={loading}
                         >Log in</Button>
                     </Form>

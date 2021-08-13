@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import {
   addItem,
   dropItem,
@@ -18,6 +18,7 @@ import Form from '../../components/Form';
 import Container from '../../components/Container';
 import ItemList from '../../components/ItemList';
 import FormLoader from '../../components/FormLoader';
+import LogOutButton from '../../components/LogOutButton';
 
 import './style.css';
 
@@ -27,6 +28,7 @@ const ToDo = () => {
   const token = localStorage.getItem('uid');
   const isFormLoading = useSelector(state => state.list.loading);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (!list.length && !!token) dispatch(getList());
@@ -42,29 +44,34 @@ const ToDo = () => {
     dispatch(addItem(data));
   };
 
+  const logout = () => {
+    localStorage.clear();
+    history.push("/");
+  };
+
   const dropItemHandle = (key) => {
     dispatch(dropItem(key));
-  }
+  };
 
   const setFilterHandle = (value) => {
     dispatch(setFilter(value));
-  }
+  };
 
   const checkItemHandle = (key) => {
     dispatch(checkItem(key));
-  }
+  };
 
   const checkAllHandle = () => {
     dispatch(checkAll());
-  }
+  };
 
   const clearCompletedHandle = () => {
     dispatch(clearCompleted());
-  }
+  };
 
   const isCheckedItems = () => {
     return list.find((item) => item.isChecked === true);
-  }
+  };
 
   const filteredList = useMemo(() => {
     if (!list.length) return [];
@@ -111,7 +118,10 @@ const ToDo = () => {
                   />}
               </>}
           </Form>
-        </Container>}
+          <LogOutButton 
+            logout={logout}
+          />
+        </Container>}        
     </>
   );
 }
