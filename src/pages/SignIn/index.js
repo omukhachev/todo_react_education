@@ -1,4 +1,4 @@
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from 'react';
 import jwt from 'jsonwebtoken';
@@ -24,7 +24,7 @@ const SignIn = () => {
         password: '',
     });
 
-    const { loading, response, token } = useSelector(state => state.user, shallowEqual);
+    const { loading, token } = useSelector(state => state.user, shallowEqual);
 
     useEffect(() => {
         !!token && token.token && localStorage.setItem('uid', (jwt.verify(token.token, 'privateKey')).id);

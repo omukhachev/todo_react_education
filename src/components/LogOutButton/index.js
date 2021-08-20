@@ -1,5 +1,5 @@
 import React from 'react';
-import LogOut from '../../Icons/logout';
+import LogOut from '../../icons/logout';
 
 import './style.css';
 

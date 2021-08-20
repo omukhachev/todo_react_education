@@ -1,8 +1,7 @@
-import Trash from '../../Icons/trash';
+import Trash from '../../icons/trash.js';
 import cn from 'classnames';
 import './style.css';
 import { useSelector } from 'react-redux';
-import ItemLoader from '../ItemLoader';
 
 const Item = ({
     item,
@@ -15,7 +14,7 @@ const Item = ({
     const loadingAll = !!useSelector(state => state.list.loadingItems.includes('all'));
 
     return (
-        <div className={cn('flexDiv' , (loadingSome || loadingAll) && 'itemLoader')}>
+        <div className={cn('flexDiv', (loadingSome || loadingAll) && 'item-loader')}>
             <div className="checkItem">
                 <label>
                     <input

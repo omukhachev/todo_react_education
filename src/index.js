@@ -20,7 +20,7 @@ import './index.css';
     filter: {
       currentFilter: 0,
     },
-    response: {
+    user: {
       token: null,
       response: null,
       error: null,

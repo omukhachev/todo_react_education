@@ -55,3 +55,15 @@
     text-decoration: line-through;
     color: gray;
 }
+
+.item-loader {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( 140deg, #ffffff 40%, #ebebeb 50%, #ffffff 60%);
+    animation: loading 0.5s ease-in-out infinite;
+    background-size: 250%;
+    border-bottom: 1px solid #cccccc;
+}

@@ -1,7 +1,7 @@
 import './style.css'
 
 const InputReg = ({ placeHolder, inputType, inputId, onChange }) => {
-    
+
     return (
         <input
             id={inputId}
