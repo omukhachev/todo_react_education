@@ -28,6 +28,7 @@ const SignIn = () => {
 
     useEffect(() => {
         !!token && token.token && localStorage.setItem('uid', (jwt.verify(token.token, 'privateKey')).id);
+        !!token && history.push("/todo");
     }, [token]);
 
     const submitLogin = () => {
@@ -39,7 +40,7 @@ const SignIn = () => {
 
     return (
         <>
-            {!!localStorage.getItem('uid') ? history.push("/todo") :
+            {/* {!!localStorage.getItem('uid') ? history.push("/todo") : */}
                 <Container>
                     <Header headerText="Sign in" />
                     <Form loading={loading}>
@@ -74,7 +75,7 @@ const SignIn = () => {
                         >Log in</Button>
                     </Form>
                 </Container>
-            }
+            {/* } */}
         </>
     )
 }

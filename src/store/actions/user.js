@@ -6,6 +6,7 @@ import {
     AUTH_USER_START,
     AUTH_USER_SUCCESS,
     AUTH_USER_ERROR,
+    USER_LOGOUT,
 } from '../constains/user';
 import {
     addUser,
@@ -57,5 +58,14 @@ export function clearResponse() {
         return dispatch({
             type: CLEAR_RESPONSE,
         });
-    }
+    };
+};
+
+export function logout() {
+    localStorage.clear();
+    return function (dispatch) {
+        return dispatch({
+            type: USER_LOGOUT,
+        });
+    };
 };

@@ -56,6 +56,12 @@ const User = (state = user, action) => {
                 error: null,
             }
         }
+        case constains.USER_LOGOUT: {
+            return {
+                ...state,
+                token: null,
+            }
+        }
         default: return state;
     }
 }

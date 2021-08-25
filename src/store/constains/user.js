@@ -7,3 +7,5 @@ export const AUTH_USER_SUCCESS = 'auth-user/success';
 export const AUTH_USER_ERROR = 'auth-user/error';
 
 export const CLEAR_RESPONSE = 'auth-user/clear-response';
+
+export const USER_LOGOUT = 'logout-user';

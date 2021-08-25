@@ -9,6 +9,7 @@ import {
   clearCompleted,
   getList,
 } from '../../store/actions/list';
+import { logout } from '../../store/actions/user';
 import { setFilter } from '../../store/actions/filter';
 import InputToDo from "../../components/InputToDo";
 import Header from '../../components/Header';
@@ -31,7 +32,7 @@ const ToDo = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (!list.length && !!token) dispatch(getList());
+    if (!!token) dispatch(getList());
   }, [])
 
   const addItemHandle = (value) => {
@@ -44,8 +45,8 @@ const ToDo = () => {
     dispatch(addItem(data));
   };
 
-  const logout = () => {
-    localStorage.clear();
+  const logoutHandle = () => {
+    dispatch(logout());
     history.push("/");
   };
 
@@ -119,7 +120,7 @@ const ToDo = () => {
               </>}
           </Form>
           <LogOutButton 
-            logout={logout}
+            logout={logoutHandle}
           />
         </Container>}        
     </>

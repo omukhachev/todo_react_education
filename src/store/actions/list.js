@@ -133,13 +133,13 @@ export function clearCompleted(token) {
   }
 }
 
-export function getList(token) {
+export function getList() {
   return async function (dispatch) {
     dispatch({
       type: GET_LIST_START,
     })
     try {
-      const data = await getListItem(token);
+      const data = await getListItem();
       return dispatch({
         type: GET_LIST_SUCCESS,
         payload: data,
